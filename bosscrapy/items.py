@@ -16,6 +16,7 @@ import scrapy
  '''
 class BosscrapyItem(scrapy.Item):
     # define the fields for your item here like:
+    item_id=scrapy.Field() #id
     name = scrapy.Field() #职位名称
     salary=scrapy.Field() #薪资
     profession =scrapy.Field() #学历

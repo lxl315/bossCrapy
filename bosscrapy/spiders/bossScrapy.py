@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import scrapy
+import scrapy,re
 from bosscrapy.items import  BosscrapyItem
 
 class BossscrapySpider(scrapy.Spider):
@@ -32,6 +32,8 @@ class BossscrapySpider(scrapy.Spider):
 
     def parse_detail(self,response):
         item= BosscrapyItem()
+        tempid=response.url.split("/")[4]
+        item['item_id']= re.match("(.*?).html",tempid).group(1)
         item['name'] = response.xpath('//h1/text()').extract_first()
         item['salary'] = response.xpath('//span[@class="salary"]/text()').extract_first().replace('\n',"").strip()
         item['profession'] =response.xpath('//div[@class="info-primary"]/p/text()').extract()[2]
